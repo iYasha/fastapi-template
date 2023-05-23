@@ -142,7 +142,7 @@ services:
     env_file:
       - .env
     command: /start-celeryworker
-  {%- end -%}
+  {%- endif -%}
 
   {%- if cookiecutter.create_frontend_container_configuration == "y" -%}
   frontend:
@@ -168,7 +168,7 @@ services:
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
       - ~/.docker/config.json:/config.json
-    command: --cleanup --interval 60 {%- if cookiecutter.create_frontend_container_configuration == "y" -%}frontend{%- end -%} celeryworker backend
+    command: --cleanup --interval 60 {%- if cookiecutter.create_frontend_container_configuration == "y" -%}frontend{%- endif -%} celeryworker backend
   {%- endif %}
 
 networks:

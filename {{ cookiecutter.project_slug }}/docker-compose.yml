@@ -140,7 +140,7 @@ services:
       context: .
       dockerfile: docker/backend
     command: /start-celeryworker
-  {%- end -%}
+  {%- endif -%}
 
   {%- if cookiecutter.create_frontend_container_configuration == "y" -%}
   frontend:
