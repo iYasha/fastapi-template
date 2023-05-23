@@ -22,7 +22,6 @@
   "redis_db": "0",
 
   "sentry_dsn": "",
-  "sentry_event_level": ["fatal", "critical", "error", "warning", "log", "info", "debug"],
 
   "stack_name": "{{ cookiecutter.project_slug }}",
   "traefik_public_network_is_external": "False",
@@ -30,7 +29,7 @@
   "email_sender": "",
   "email_host": "",
   "email_port": "",
-  "email_tls": "",
+  "email_tls": "True",
   "email_username": "",
   "email_password": "",
 

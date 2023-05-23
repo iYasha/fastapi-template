@@ -17,7 +17,7 @@ def remove_dir(directory_name):
 if __name__ == '__main__':
 
     if '{{ cookiecutter.create_frontend_container_configuration }}' != 'y':
-        remove_dir('frontend')
+        remove_dir('docker/frontend')
 
     if '{{ cookiecutter.add_celery }}' != 'y':
         # remove dir PROJECT_DIRECTORY/frontend

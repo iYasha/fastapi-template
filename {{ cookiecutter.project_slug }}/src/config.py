@@ -134,9 +134,8 @@ class EnvSettings(BaseSettings):
     SENTRY_DEBUG: bool = False
     SENTRY_REQUEST_BODIES: str = 'always'
     SENTRY_SEND_DEFAULT_PII: bool = False
-    SENTRY_EVENT_LEVEL: Optional[int] = None
 
-    @validator('SENTRY_DSN', 'SENTRY_EVENT_LEVEL', pre=True)
+    @validator('SENTRY_DSN', pre=True)
     def empty_string_validate(
         cls,  # noqa: N805
         value: Optional[str],

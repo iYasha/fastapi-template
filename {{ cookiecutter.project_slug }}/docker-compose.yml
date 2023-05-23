@@ -3,8 +3,8 @@ services:
 
   proxy:
     ports:
-        - "80:80"
-        - "8080:8080"
+      - "80:80"
+      - "8080:8080"
     image: traefik:latest
     networks:
       - ${TRAEFIK_PUBLIC_NETWORK?Variable not set}
@@ -83,7 +83,7 @@ services:
 
   backend:
     ports:
-        - "8888:8888"
+      - "8888:8888"
     depends_on:
       - db
     volumes:
@@ -95,7 +95,7 @@ services:
       - .env
     build:
       context: .
-      dockerfile: docker/backend
+      dockerfile: docker/backend/Dockerfile
     command: /start-reload.sh
     labels:
       - traefik.enable=true
@@ -125,7 +125,7 @@ services:
       - traefik.http.routers.${STACK_NAME?Variable not set}-fileproxy-http.rule=PathPrefix(`/files`)
       - traefik.http.services.${STACK_NAME?Variable not set}-fileproxy.loadbalancer.server.port=80
 
-  {%- if cookiecutter.add_celery == "y" -%}
+  {% if cookiecutter.add_celery == "y" %}
   celeryworker:
     depends_on:
       - db
@@ -138,11 +138,11 @@ services:
       - .env
     build:
       context: .
-      dockerfile: docker/backend
+      dockerfile: docker/backend/Dockerfile
     command: /start-celeryworker
-  {%- endif -%}
+  {% endif %}
 
-  {%- if cookiecutter.create_frontend_container_configuration == "y" -%}
+  {% if cookiecutter.create_frontend_container_configuration == "y" %}
   frontend:
     container_name: frontend
     image: index.docker.io/your_frontend_image:tag
@@ -154,7 +154,7 @@ services:
       - traefik.constraint-label-stack=${TRAEFIK_TAG?Variable not set}
       - traefik.http.routers.${STACK_NAME?Variable not set}-frontend-http.rule=PathPrefix(`/`)
       - traefik.http.services.${STACK_NAME?Variable not set}-frontend.loadbalancer.server.port=80
-  {%- endif -%}
+  {% endif %}
 
 networks:
   traefik-public:

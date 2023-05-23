@@ -3,7 +3,9 @@ import uuid
 
 import aiofiles
 import psutil
+{% if cookiecutter.add_celery == 'y' %}
 from background import celery_app
+{% endif %}
 from cache import RedisBackend
 from database import database
 
@@ -79,7 +81,7 @@ async def check_redis(redis_client: RedisBackend) -> str:
         return 'Redis is not available'
     return HealthCheck.OK_STATUS
 
-
+{% if cookiecutter.add_celery == 'y' %}
 def celery_check() -> str:
     task = celery_app.send_task(
         'test_celery',
@@ -88,3 +90,4 @@ def celery_check() -> str:
         routing_key='main-queue',
     )
     return str(task)
+{% endif %}
