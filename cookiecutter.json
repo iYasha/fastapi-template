@@ -1,0 +1,38 @@
+{
+  "environment": ["production", "dev", "local"],
+  "project_name": "MyProject",
+  "project_slug": "{{ cookiecutter.project_name.replace('_', '-').lower() }}",
+  "author_name": "",
+  "author_email": "",
+  "full_domain": "",
+  "secret_key": "{{ random_ascii_string(50) }}",
+  "docs_suffix": "docs",
+
+  "celery_worker_concurrency": "2",
+
+  "db_user": "postgres",
+  "db_password": "{{ random_ascii_string(12) }}",
+  "db_host": "db",
+  "db_port": "5432",
+  "db_name": "app",
+
+  "redis_host": "redis",
+  "redis_port": "6379",
+  "redis_db": "0",
+
+  "sentry_dsn": "",
+  "sentry_event_level": ["fatal", "critical", "error", "warning", "log", "info", "debug"],
+
+  "stack_name": "{{ cookiecutter.project_slug }}",
+  "traefik_public_network_is_external": "False",
+
+  "email_sender": "",
+  "email_host": "",
+  "email_port": "",
+  "email_tls": "",
+  "email_username": "",
+  "email_password": "",
+
+  "add_frontend_container": ["y", "n"],
+  "add_watchtower": ["y", "n"]
+}
