@@ -129,6 +129,7 @@ services:
       - traefik.http.routers.${STACK_NAME?Variable not set}-fileproxy-http.entrypoints=websecure
       - traefik.http.routers.${STACK_NAME?Variable not set}-fileproxy-http.tls=true
 
+  {%- if cookiecutter.add_celery == "y" -%}
   celeryworker:
     container_name: celeryworker
     image: index.docker.io/your_backend_image:tag
@@ -141,8 +142,9 @@ services:
     env_file:
       - .env
     command: /start-celeryworker
+  {%- end -%}
 
-  {%- if cookiecutter.add_frontend_container == "y" -%}
+  {%- if cookiecutter.create_frontend_container_configuration == "y" -%}
   frontend:
     container_name: frontend
     image: index.docker.io/your_frontend_image:tag
@@ -158,7 +160,7 @@ services:
       - traefik.http.routers.${STACK_NAME?Variable not set}-frontend-http.tls=true
   {%- endif %}
 
-  {%- if cookiecutter.add_watchtower == "y" -%}
+  {%- if cookiecutter.create_watchtower_configuration == "y" -%}
   watchtower:
     container_name: watchtower
     image: index.docker.io/containrrr/watchtower:latest
@@ -166,7 +168,7 @@ services:
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
       - ~/.docker/config.json:/config.json
-    command: --cleanup --interval 60 {%- if cookiecutter.add_frontend_container == "y" -%}frontend{%- end -%} celeryworker backend
+    command: --cleanup --interval 60 {%- if cookiecutter.create_frontend_container_configuration == "y" -%}frontend{%- end -%} celeryworker backend
   {%- endif %}
 
 networks:

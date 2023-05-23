@@ -5,7 +5,7 @@ import aiofiles
 import psutil
 from background import celery_app
 from cache import RedisBackend
-from database import database  # type: ignore
+from database import database
 
 from api.v1.healthcheck.config import HealthCheck
 

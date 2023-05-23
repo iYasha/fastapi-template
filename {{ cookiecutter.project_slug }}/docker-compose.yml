@@ -125,6 +125,7 @@ services:
       - traefik.http.routers.${STACK_NAME?Variable not set}-fileproxy-http.rule=PathPrefix(`/files`)
       - traefik.http.services.${STACK_NAME?Variable not set}-fileproxy.loadbalancer.server.port=80
 
+  {%- if cookiecutter.add_celery == "y" -%}
   celeryworker:
     depends_on:
       - db
@@ -139,8 +140,9 @@ services:
       context: .
       dockerfile: docker/backend
     command: /start-celeryworker
+  {%- end -%}
 
-  {%- if cookiecutter.add_frontend_container == "y" -%}
+  {%- if cookiecutter.create_frontend_container_configuration == "y" -%}
   frontend:
     container_name: frontend
     image: index.docker.io/your_frontend_image:tag

@@ -2,6 +2,7 @@
   "environment": ["production", "dev", "local"],
   "project_name": "MyProject",
   "project_slug": "{{ cookiecutter.project_name.replace('_', '-').lower() }}",
+  "version": "0.1.0",
   "author_name": "",
   "author_email": "",
   "full_domain": "",
@@ -33,6 +34,7 @@
   "email_username": "",
   "email_password": "",
 
-  "add_frontend_container": ["y", "n"],
-  "add_watchtower": ["y", "n"]
+  "create_frontend_container_configuration": ["y", "n"],
+  "create_watchtower_configuration": ["y", "n"],
+  "add_celery": ["y", "n"]
 }
