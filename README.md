@@ -38,7 +38,7 @@
 - **[Redis](https://redis.io/)** as a message broker and for caching
 - Ready to use **file management**, **OTP authentication** using **JWT**, **scheduled tasks** and **background tasks**
 - Optional **[Celery](https://docs.celeryproject.org/en/stable/)** for background tasks
-- Optional **Frontend** container configuration with **[Nginx](https://www.nginx.com/)**
+- Optional **Frontend** container configuration using **[Nginx](https://www.nginx.com/)**
 
 ## Getting Started:
 First, install cookiecutter if you don't already have it:
@@ -85,9 +85,9 @@ Next steps are optional and depends on your IDE. You can skip them if you don't 
 * Install plugin [.env files support](https://plugins.jetbrains.com/plugin/9525--env-files-support)
 * Open project in PyCharm and create interpreter from Poetry virtual environment
 * Add **Python interpreter** to Run configurations: `Serve` and `Celery`(Optional)
-  ![PyCharm Run Configurations](/Users/iyasha/Documents/github/petproject/fastapi-template/images/pycharm_run_configuration.png)
+  ![PyCharm Run Configurations](https://raw.githubusercontent.com/iYasha/fastapi-template/main/images/pycharm_run_configuration.png)
 * Create file watcher for formatting and linting [Guide Here](https://melevir.medium.com/pycharm-loves-flake-671c7fac4f52):
-  ![PyCharm File Watcher](/Users/iyasha/Documents/github/petproject/fastapi-template/images/pycharm_flake_file_watcher_configuration.png)
+  ![PyCharm File Watcher](https://raw.githubusercontent.com/iYasha/fastapi-template/main/images/pycharm_flake_file_watcher_configuration.png)
 * Run `Serve` and `Celery`(Optional) configuration and go to http://localhost:8000/docs
 
 ### Other IDEs
