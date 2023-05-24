@@ -13,10 +13,10 @@ from sqlalchemy_utils import create_database
 from sqlalchemy_utils import database_exists
 from sqlalchemy_utils import drop_database
 from transaction import Transaction
-
-from sdk.schemas import TrackingSchemaMixin
 from utils import MockCacheBackend
 from utils import alembic_config_from_url
+
+from sdk.schemas import TrackingSchemaMixin
 
 if not settings.TESTING:
     raise ValueError('Please, set TESTING=True in core/config.py to run tests')

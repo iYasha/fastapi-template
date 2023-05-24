@@ -5,11 +5,11 @@
   "version": "0.1.0",
   "author_name": "",
   "author_email": "",
-  "full_domain": "",
+  "full_domain": "http://localhost",
   "secret_key": "{{ random_ascii_string(50) }}",
   "docs_suffix": "docs",
 
-  "celery_worker_concurrency": "2",
+  "celery_worker_concurrency": "1",
 
   "db_user": "postgres",
   "db_password": "{{ random_ascii_string(12) }}",

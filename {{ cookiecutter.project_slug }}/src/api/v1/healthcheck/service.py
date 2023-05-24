@@ -3,6 +3,7 @@ import uuid
 
 import aiofiles
 import psutil
+
 {% if cookiecutter.add_celery == 'y' %}
 from background import celery_app
 {% endif %}

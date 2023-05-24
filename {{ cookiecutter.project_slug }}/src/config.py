@@ -4,6 +4,7 @@ from typing import Any
 from typing import Dict
 from typing import List
 from typing import Optional
+from typing import Union
 
 from passlib.context import CryptContext
 from pydantic import AnyHttpUrl
@@ -128,6 +129,17 @@ class EnvSettings(BaseSettings):
     EMAIL_TLS: bool = True
     EMAIL_USERNAME: Optional[str] = None
     EMAIL_PASSWORD: Optional[str] = None
+
+    @validator('EMAIL_PORT', pre=True)
+    def validate_email_port(
+        cls,
+        v: Optional[Union[str, int]],
+        values: Dict[str, Any],  # noqa: RSPEC-5720
+    ) -> Optional[int]:
+        if not v:
+            return None
+
+        return int(v)
 
     # Sentry configuration.
     SENTRY_DSN: Optional[HttpUrl] = None
