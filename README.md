@@ -66,7 +66,7 @@ poetry install
 ```
 * Run database and celery (optional) containers:
 ```bash
-docker-compose up -d db celery
+docker-compose up -d db celeryworker
 ```
 * Change database and redis host in `.env` file:
 ```
@@ -153,9 +153,68 @@ pre-commit install
 | `create_frontend_container_configuration` | If 'y' then nginx container will be add to docker-compose files                                  | `y`                    |
 | `create_watchtower_configuration` | If 'y' then watchtower container will be add to docker-compose files                              | `y`                    |
 
+## Scheduler
+For scheduling tasks you need to set up cron job in your server. For example:
+```bash
+* * * * * docker exec backend python manage.py -c schedule
+```
 
 ## Project structure
-Comming soon...
+```
+.
+├─ alembic
+├─ database
+├─ docker
+├─ media
+├─ redis
+├─ src
+│  ├─ api
+│  │  ├─ v1
+│  │  │  └─ module_name
+│  │  │     ├─ models.py
+│  │  │     ├─ enums.py
+│  │  │     ├─ repositories.py
+│  │  │     ├─ schemas.py
+│  │  │     └─ services.py
+│  │  └─ router.py
+│  ├─ commands
+│  │  ├─ base.py
+│  │  ├─ schedule.py
+│  │  └─ your_command.py
+│  ├─ sdk
+│  │  ├─ exceptions
+│  │  │  ├─ exception_handler_mapping.py
+│  │  │  ├─ exceptions.py
+│  │  │  ├─ handlers.py
+│  │  │  └─ helpers.py
+│  │  ├─ models.py
+│  │  ├─ ordering.py
+│  │  ├─ pagination.py
+│  │  ├─ repositories.py
+│  │  ├─ responses.py
+│  │  ├─ schemas.py
+│  │  └─ utils.py
+│  ├─ background.py
+│  ├─ cache.py
+│  ├─ config.py
+│  ├─ database.py
+│  ├─ dependencies.py
+│  ├─ main.py
+│  ├─ manage.py
+│  ├─ sentry.py
+│  └─ tasks.py
+└─ tests
+   ├─ api
+   │  └─ v1
+   │     └─ module_name
+   │        ├─ test_views.py
+   │        ├─ test_services.py
+   │        ├─ test_repositories.py
+   │        └─ test_schemas.py
+   ├─ common.py
+   ├─ conftest.py
+   └─ utils.py
+```
 
 ## Roadmap
  - [ ] Add project structure description to README.md

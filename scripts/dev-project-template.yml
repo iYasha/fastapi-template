@@ -1,0 +1,7 @@
+default_context:
+  project_name: "dev-fastapi-template"
+  environment: "local"
+  db_host: "localhost"
+  redis_host: "localhost"
+  create_frontend_container_configuration: "n"
+  create_watchtower_configuration: "n"

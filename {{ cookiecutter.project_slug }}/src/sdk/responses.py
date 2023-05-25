@@ -34,6 +34,7 @@ class ResponseStatus(int, Enum):
     INVALID_FILE_PAGE_NAME = 4012
     FILE_NOT_FOUND = 4013
     PAGINATION_PAGE_ERROR = 4014
+    ORDERING_FIELD_NOT_AVAILABLE = 4015
 
     @staticmethod
     def from_status_code(status_code: int) -> 'ResponseStatus':

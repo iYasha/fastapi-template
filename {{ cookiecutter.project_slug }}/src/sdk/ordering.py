@@ -1,6 +1,7 @@
 from typing import Any
 from typing import Callable
 from typing import Dict
+from typing import Iterable
 from typing import List
 from typing import Optional
 
@@ -29,7 +30,7 @@ class OrderingManager:
 
     def __init__(
         self,
-        params: str = Query(None, alias=_alias, description='Example: field_1, -field_2'),
+        params: Iterable[str] = Query(None, alias=_alias, description='Example: field_1, -field_2'),
     ) -> None:
         """
         :param params: string of comma separated field names
@@ -40,7 +41,7 @@ class OrderingManager:
         self.ordering_fields = []
 
         if params is not None:
-            self.ordering_fields = params.split(',')
+            self.ordering_fields = params
 
     def is_available(self, field: str) -> str:
         if self._available_columns is None:
@@ -102,3 +103,13 @@ class OrderingManager:
         return [
             self._get_ordering(model, field, additional_fields) for field in self.ordering_fields
         ]
+
+
+def get_ordering(
+    params: str = Query(
+        None,
+        alias=OrderingManager._alias,
+        description='Example: field_1, -field_2',
+    ),
+) -> OrderingManager:
+    return OrderingManager(params.split(','))
