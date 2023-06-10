@@ -156,7 +156,7 @@ pre-commit install
 ## Scheduler
 For scheduling tasks you need to set up cron job in your server. For example:
 ```bash
-* * * * * docker exec backend python manage.py -c schedule
+* * * * * docker exec backend python manage.py schedule
 ```
 
 ## Project structure
@@ -217,7 +217,7 @@ For scheduling tasks you need to set up cron job in your server. For example:
 ```
 
 ## Roadmap
- - [ ] Add project structure description to README.md
+ - [x] Add project structure description to README.md
  - [ ] Add tests
  - [ ] Add README.md to project template
 
