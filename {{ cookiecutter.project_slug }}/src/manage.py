@@ -1,8 +1,10 @@
 import argparse
 import asyncio
+from typing import Any, Tuple
 
 import sentry_sdk
-from commands.base import Command
+from commands.base import command_parser
+from commands import *  # noqa: F401, F403
 from database import database
 
 
@@ -16,35 +18,19 @@ async def shutdown() -> None:
 
 class ConsoleManager:
     @classmethod
-    async def execute_command(cls, command_name: str) -> None:
-        if command_name is None:
+    async def execute_command(cls, args: argparse.Namespace) -> None:
+        if not hasattr(args, 'command') or args.command is None:
             raise ValueError('Command name is required')
 
-        command_instance: Command = next(
-            filter(lambda command: command.command_name == command_name, Command.commands),
-            None,
-        )
-        if command_instance is None:
-            raise ValueError(f'Command {command_name} not found')
-
-        await command_instance.run()
+        await args.command(args)
 
 
 if __name__ == '__main__':
-    # TODO: Add subparsers for each command https://docs.python.org/3/library/argparse.html#sub-commands
-    argparse = argparse.ArgumentParser()
-    argparse.add_argument(
-        '-c',
-        '--command',
-        type=str,
-        help='Run command',
-        required=True,
-    )
-    args = argparse.parse_args()
+    args = command_parser.parse_args()
     loop = asyncio.get_event_loop()
     loop.run_until_complete(startup())
     try:
-        loop.run_until_complete(ConsoleManager.execute_command(args.command))
+        loop.run_until_complete(ConsoleManager.execute_command(args))
     except Exception as e:
         sentry_sdk.capture_exception(e)
         print(e)  # noqa: T201

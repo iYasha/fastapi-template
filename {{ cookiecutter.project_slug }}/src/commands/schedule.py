@@ -1,14 +1,17 @@
+from argparse import Namespace
 from datetime import datetime
 from typing import List
 from typing import Optional
 from typing import Type
 
-from commands.base import Command
+from commands.base import BaseCommand
 from croniter import croniter
+
+from commands.file_cleaner import FileCleaner
 
 
 class Job:
-    def __init__(self, command: Type[Command], cron_pattern: Optional[str] = None) -> None:
+    def __init__(self, command: Type[BaseCommand], cron_pattern: Optional[str] = None) -> None:
         self.command = command
         self.cron_pattern = cron_pattern
 
@@ -36,23 +39,23 @@ class Job:
 
 class Scheduler:
     @classmethod
-    def command(cls, command: Type[Command]) -> Job:
+    def command(cls, command: Type[BaseCommand]) -> Job:
         return Job(command)
 
 
-class Schedule(Command):
+class Schedule(BaseCommand):
     command_name = 'schedule'
+    help_text = 'Run scheduled commands.'
     schedule: Scheduler = Scheduler
 
     @classmethod
     async def get_jobs(cls) -> List[Job]:
         return [
-            # TODO: Remove all files from tmp dir at 00:00 every day.
-            # cls.schedule.command(EveryDayPushNotification).cron('0 9 * * *'),  # noqa: E800
+            cls.schedule.command(FileCleaner).cron('0 0 * * *'),  # noqa: E800
         ]
 
     @classmethod
-    async def run(cls) -> None:
+    async def run(cls, args: Optional[Namespace] = None) -> None:
         now = datetime.utcnow()
         for job in await cls.get_jobs():
             if job.is_due(now):
