@@ -49,12 +49,8 @@ class EnvSettings(BaseSettings):
     OTP_RATE_LIMIT: int = 3
     OTP_EXPIRE: int = 60 * 5  # 5 minutes
     AUTH_JWT_ALGORITHM: str = 'HS256'
-    AUTH_JWT_ACCESS_TOKEN_EXP_DELTA_MINUTES: int = (
-        60 * 24 * 2
-    )  # 60 * 24 * 2  # 60 minutes * 24 hours * 2 days = 2 days
-    JWT_REFRESH_TOKEN_EXP_DELTA_MINUTES: int = (
-        60 * 24 * 14
-    )  # 60 minutes * 24 hours * 14 days = 2 week
+    AUTH_JWT_ACCESS_TOKEN_EXP_DELTA_MINUTES: int = 60 * 24 * 2  # 60 * 24 * 2  # 60 minutes * 24 hours * 2 days = 2 days
+    JWT_REFRESH_TOKEN_EXP_DELTA_MINUTES: int = 60 * 24 * 14  # 60 minutes * 24 hours * 14 days = 2 week
 
     # API configuration.
     DEFAULT_DATETIME_FORMAT: str = '%Y-%m-%dT%H:%M:%S%z'
@@ -132,9 +128,8 @@ class EnvSettings(BaseSettings):
 
     @validator('EMAIL_PORT', pre=True)
     def validate_email_port(
-        cls,
+        cls,  # noqa: N805
         v: Optional[Union[str, int]],
-        values: Dict[str, Any],  # noqa: RSPEC-5720
     ) -> Optional[int]:
         if not v:
             return None

@@ -1,5 +1,6 @@
 import abc
-from argparse import ArgumentParser, Namespace
+from argparse import ArgumentParser
+from argparse import Namespace
 from typing import Optional
 
 from config import settings

@@ -54,8 +54,7 @@ class AuthorizationViews:
         user_data: PhoneNumberSchemaMixin,
     ) -> DefaultResponse:
         if (  # For testing purposes only
-            settings.ENVIRONMENT in (Environment.DEV, Environment.LOCAL)
-            and user_data.phone_number == '+380501234567'
+            settings.ENVIRONMENT in (Environment.DEV, Environment.LOCAL) and user_data.phone_number == '+380501234567'
         ):
             return DefaultResponse(content=True)
 

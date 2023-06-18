@@ -100,9 +100,7 @@ class OrderingManager:
     ) -> List[UnaryExpression]:
         if additional_fields is None:
             additional_fields = {}
-        return [
-            self._get_ordering(model, field, additional_fields) for field in self.ordering_fields
-        ]
+        return [self._get_ordering(model, field, additional_fields) for field in self.ordering_fields]
 
 
 def get_ordering(

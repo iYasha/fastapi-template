@@ -1,10 +1,11 @@
+import argparse
 import os
 import time
 from typing import Optional
 
-from api.v1.files.repositories import FileRepository
 from commands.base import BaseCommand
-import argparse
+
+from api.v1.files.repositories import FileRepository
 
 
 class FileCleaner(BaseCommand):
@@ -29,6 +30,3 @@ class FileCleaner(BaseCommand):
             file_path = os.path.join(FileRepository.tmp_path, file)
             if os.path.isfile(file_path) and not file.startswith('.') and os.stat(file_path).st_mtime < days:
                 os.remove(file_path)
-
-
-

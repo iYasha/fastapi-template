@@ -6,7 +6,7 @@ from sdk.models import UUIDModelMixin
 
 
 class User(UUIDModelMixin, AuditMixin, Base):
-    """ User model """
+    """User model"""
 
     __tablename__ = 'users'
 

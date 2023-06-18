@@ -22,7 +22,6 @@ from sdk.pagination import PaginationManager
 from sdk.schemas import BaseSchema
 from sdk.schemas import PaginatedSchema
 
-
 base_operations = {
     'not': operator.ne,
     'exact': operator.eq,
@@ -170,11 +169,7 @@ class Node:
             self.connector = conn_type
             self.children = [obj, data]
             return data
-        elif (
-            isinstance(data, Node)
-            and not data.negated
-            and (data.connector == conn_type or len(data) == 1)
-        ):
+        elif isinstance(data, Node) and not data.negated and (data.connector == conn_type or len(data) == 1):
             # We can squash the other node's children directly into this node.
             # We are just doing (AB)(CD) == (ABCD) here, with the addition that
             # if the length of the other node is 1 the connector doesn't
@@ -249,14 +244,14 @@ class Q(Node):
         return getattr(sa, self.connector.lower() + '_')
 
     @staticmethod
-    def get_operation(
+    def get_operation(  # noqa: C901, CCR001
         model: Type[ModelType],
         field: str,
         value: Any,  # noqa: ANN401
         operation: str,
     ) -> Any:  # noqa: ANN401
-        # TODO: Add support for more operations and refactor this method.
         model_field = getattr(model, field)
+        # TODO: Add support for more operations and refactor this method.
 
         if operation in base_operations:
             return base_operations[operation](model_field, value)
@@ -307,9 +302,7 @@ class Q(Node):
         connector = self.get_connector()
         return connector(
             *[
-                child.get_where_clause(model)
-                if isinstance(child, Q)
-                else self.get_lookup(model, *child)
+                child.get_where_clause(model) if isinstance(child, Q) else self.get_lookup(model, *child)
                 for child in self.children
             ],
         )

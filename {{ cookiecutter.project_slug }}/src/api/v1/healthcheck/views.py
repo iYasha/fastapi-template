@@ -14,19 +14,19 @@ router = APIRouter()
 
 @router.get('/readiness', response_model=DefaultResponseSchema[str])
 def readiness() -> DefaultResponse:
-    """ Простейший эндпоинт для проверки работоспособности сервиса """
+    """Простейший эндпоинт для проверки работоспособности сервиса"""
     return DefaultResponse(content=service.readiness_check())
 
 
 @router.get('/check_database', response_model=DefaultResponseSchema[str])
 async def check_database() -> DefaultResponse:
-    """ Эндпоинт для проверки коннекта к БД """
+    """Эндпоинт для проверки коннекта к БД"""
     return DefaultResponse(content=await service.check_database())
 
 
 @router.get('/sentry_debug')
 def sentry_debug() -> None:
-    """ Простейший эндпоинт для проверки работоспособности отправки ошибок в Sentry """
+    """Простейший эндпоинт для проверки работоспособности отправки ошибок в Sentry"""
     service.sentry_debug()
 
 
@@ -42,7 +42,7 @@ async def celery_check() -> DefaultResponse:
 
 @router.get('/liveness', response_model=DefaultResponseSchema[schemas.HealthCheckStatuses])
 async def liveness(redis_client: RedisBackend = Depends(cache_storage)) -> DefaultResponse:
-    """ Сводная информация по работоспособности различных компонентов, используемых сервисом """
+    """Сводная информация по работоспособности различных компонентов, используемых сервисом"""
 
     status_code = status.HTTP_200_OK
     hc_statuses = schemas.HealthCheckStatuses(

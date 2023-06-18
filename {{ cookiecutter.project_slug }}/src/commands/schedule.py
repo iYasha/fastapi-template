@@ -5,9 +5,8 @@ from typing import Optional
 from typing import Type
 
 from commands.base import BaseCommand
-from croniter import croniter
-
 from commands.file_cleaner import FileCleaner
+from croniter import croniter
 
 
 class Job:

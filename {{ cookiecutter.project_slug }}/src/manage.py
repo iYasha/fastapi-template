@@ -1,10 +1,9 @@
 import argparse
 import asyncio
-from typing import Any, Tuple
 
 import sentry_sdk
-from commands.base import command_parser
 from commands import *  # noqa: F401, F403
+from commands.base import command_parser
 from database import database
 
 

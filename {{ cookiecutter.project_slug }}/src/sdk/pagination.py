@@ -30,18 +30,10 @@ class PaginationManager:
         self.page_size = page_size
 
     def get_page_count(self, count: int) -> int:
-        return (
-            count // self.page_size + count % self.page_size  # noqa: S001
-            if self.page_size
-            else None
-        )
+        return count // self.page_size + count % self.page_size if self.page_size else None  # noqa: S001
 
     def get_next_page(self, count: int) -> Optional[int]:
-        return (
-            (self.page + 2 if count > (self.page + 1) * self.page_size else None)
-            if self.page_size
-            else None
-        )
+        return (self.page + 2 if count > (self.page + 1) * self.page_size else None) if self.page_size else None
 
     def get_prev_page(self) -> Optional[int]:
         return self.page if self.page > 0 else None
