@@ -172,7 +172,7 @@ tests_no_zope = ["hypothesis", "pympler", "pytest (>=4.3.0)", "pytest-xdist", "c
 name = "autoflake"
 version = "1.7.8"
 description = "Removes unused imports and unused variables"
-category = "main"
+category = "dev"
 optional = false
 python-versions = ">=3.7"
 
@@ -1093,33 +1093,6 @@ optional = false
 python-versions = ">=3.5"
 
 [[package]]
-name = "numpy"
-version = "1.24.2"
-description = "Fundamental package for array computing in Python"
-category = "main"
-optional = false
-python-versions = ">=3.8"
-
-[[package]]
-name = "opencv-python-headless"
-version = "4.7.0.72"
-description = "Wrapper package for OpenCV python bindings."
-category = "main"
-optional = false
-python-versions = ">=3.6"
-
-[package.dependencies]
-numpy = [
-    {version = ">=1.21.0", markers = "python_version <= \"3.9\" and platform_system == \"Darwin\" and platform_machine == \"arm64\""},
-    {version = ">=1.21.2", markers = "python_version >= \"3.10\""},
-    {version = ">=1.21.4", markers = "python_version >= \"3.10\" and platform_system == \"Darwin\""},
-    {version = ">=1.22.0", markers = "python_version >= \"3.11\""},
-    {version = ">=1.19.3", markers = "python_version >= \"3.6\" and platform_system == \"Linux\" and platform_machine == \"aarch64\" or python_version >= \"3.9\""},
-    {version = ">=1.17.0", markers = "python_version >= \"3.7\""},
-    {version = ">=1.17.3", markers = "python_version >= \"3.8\""},
-]
-
-[[package]]
 name = "openpyxl"
 version = "3.1.2"
 description = "A Python library to read/write Excel 2010 xlsx/xlsm files"
@@ -1212,18 +1185,6 @@ description = "Tiny 'shelve'-like database with concurrency support"
 category = "dev"
 optional = false
 python-versions = "*"
-
-[[package]]
-name = "pillow"
-version = "9.1.0"
-description = "Python Imaging Library (Fork)"
-category = "main"
-optional = false
-python-versions = ">=3.7"
-
-[package.extras]
-docs = ["olefile", "sphinx (>=2.4)", "sphinx-copybutton", "sphinx-issues (>=3.0.1)", "sphinx-removed-in", "sphinx-rtd-theme (>=1.0)", "sphinxext-opengraph"]
-tests = ["check-manifest", "coverage", "defusedxml", "markdown2", "olefile", "packaging", "pyroma", "pytest", "pytest-cov", "pytest-timeout"]
 
 [[package]]
 name = "pluggy"
@@ -1330,7 +1291,7 @@ email = ["email-validator (>=1.0.3)"]
 name = "pyflakes"
 version = "2.2.0"
 description = "passive checker of Python programs"
-category = "main"
+category = "dev"
 optional = false
 python-versions = ">=2.7, !=3.0.*, !=3.1.*, !=3.2.*, !=3.3.*"
 
@@ -1424,9 +1385,9 @@ pytest = ">=2.6.0"
 
 [[package]]
 name = "pytest-mock"
-version = "3.10.0"
+version = "3.11.1"
 description = "Thin-wrapper around the mock package for easier use with pytest"
-category = "main"
+category = "dev"
 optional = false
 python-versions = ">=3.7"
 
@@ -1583,14 +1544,6 @@ sqlalchemy = ["sqlalchemy (>=1.2)"]
 starlette = ["starlette (>=0.19.1)"]
 starlite = ["starlite (>=1.48)"]
 tornado = ["tornado (>=5)"]
-
-[[package]]
-name = "sitemap-generator"
-version = "0.9.10"
-description = "web crawler and sitemap generator."
-category = "main"
-optional = false
-python-versions = "*"
 
 [[package]]
 name = "six"
@@ -1887,7 +1840,7 @@ testing = ["coverage (>=5.0.3)", "zope.event", "zope.testing"]
 [metadata]
 lock-version = "1.1"
 python-versions = "^3.9"
-content-hash = "c1c0f5af3095823c29f48da4c1f165a4780562023db17a32902bb3594828031f"
+content-hash = "8655012318c207655b089c62dfe64b2fb7d874dfd5bf2c30b2dfb5a4e1f202f3"
 
 [metadata.files]
 add-trailing-comma = []
@@ -1976,8 +1929,6 @@ mccabe = []
 multipart = []
 mypy = []
 mypy-extensions = []
-numpy = []
-opencv-python-headless = []
 openpyxl = []
 packaging = []
 parso = []
@@ -1987,7 +1938,6 @@ pep8-naming = []
 pexpect = []
 phonenumbers = []
 pickleshare = []
-pillow = []
 pluggy = []
 premailer = []
 prompt-toolkit = []
@@ -2015,7 +1965,6 @@ regex = []
 requests = []
 rfc3986 = []
 sentry-sdk = []
-sitemap-generator = []
 six = []
 sniffio = []
 soupsieve = []
